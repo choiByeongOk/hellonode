@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    h1 #{title}: #{book.title}
+
+    if book_instances.length
+
+        p #[strong Delete the following book instances before attempting to delete this book.]
+
+        div(style='margin-left:20px;margin-top:20px')
+
+            h4 Book Instances
+
+            dl
+            each BookInstance in book_instances
+                dt
+                    a(href=BookInstance.url) #{BookInstance.imprint}
+                dd #{BookInstance.status}
+
+    else
+        p Do you really want to delete this Book?
+        h2 #{book._id}
+        h3 #{book.name}
+        p 가나다라
+
+        form(method='POST' action='')
+            div.form-group
+                input#bookid.form-control(type='hidden', name='bookid', required='true', value=book._id)
+                //input#authorid.form-control(type='hidden', name='authorid', required='true', value=author._id )
+
+            button.btn.btn-primary(type='submit') Delete
+
+
